@@ -26,15 +26,15 @@ const MessageInput = ({ onSendMessage, onSendFile }) => {
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         placeholder="Enter message..."
-        className="flex-1 p-2 border border-gray-300 rounded-l"
+        className="flex-1 p-3 mr-2 border border-gray-300 rounded-xl "
       />
       <button
         type="submit"
-        className="bg-blue-500 text-white px-4 py-2 hover:bg-blue-600"
+        className="group bg-gradient-to-r from-blue-400 to-blue-600 text-white px-6 py-3 rounded-xl hover:from-blue-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 font-medium"
       >
         Send
       </button>
-      <label className="bg-green-500 text-white px-4 py-2 cursor-pointer hover:bg-green-600 ml-2">
+      <label className="bg-white text-white px-4 py-2 cursor-pointer hover:bg-white ml-2 rounded-xl">
         <input
           type="file"
           onChange={handleFileChange}
