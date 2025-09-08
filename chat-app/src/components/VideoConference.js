@@ -113,7 +113,7 @@ const VideoConference = ({ roomId, userId }) => {
       localVideoRef.current.srcObject = stream;
       return stream;
     } catch (error) {
-      console.error('Lỗi khi truy cập camera/micro:', error);
+      console.error('Error accessing camera/microphone:', error);
       throw error;
     }
   };
@@ -138,18 +138,18 @@ const VideoConference = ({ roomId, userId }) => {
     }
     setIsCallActive(false);
     
-    // Gửi thông báo kết thúc cuộc gọi
+    // Send end call notification
     Object.values(peersRef.current).forEach(peer => peer.destroy());
     peersRef.current = {};
   };
 
   return (
     <div className="bg-white p-4 rounded-lg shadow-md">
-      <h3 className="text-lg font-semibold mb-4">Hội nghị truyền hình</h3>
+      <h3 className="text-lg font-semibold mb-4">Video Conference</h3>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
         <div>
-          <h4 className="text-sm font-medium mb-2">Camera của bạn</h4>
+          <h4 className="text-sm font-medium mb-2">Your Camera</h4>
           <video
             ref={localVideoRef}
             autoPlay
@@ -159,7 +159,7 @@ const VideoConference = ({ roomId, userId }) => {
         </div>
         
         <div>
-          <h4 className="text-sm font-medium mb-2">Người khác</h4>
+          <h4 className="text-sm font-medium mb-2">Others</h4>
           <video
             ref={remoteVideoRef}
             autoPlay
@@ -174,14 +174,14 @@ const VideoConference = ({ roomId, userId }) => {
             onClick={startCall}
             className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
           >
-            Bắt đầu gọi
+            Start Call
           </button>
         ) : (
           <button
             onClick={endCall}
             className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
           >
-            Kết thúc
+            End
           </button>
         )}
       </div>

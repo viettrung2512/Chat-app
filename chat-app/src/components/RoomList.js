@@ -36,14 +36,14 @@ const RoomList = ({ onJoinRoom }) => {
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-4">Danh sách phòng chat</h2>
+      <h2 className="text-2xl font-bold mb-4">Chat Room List</h2>
       
       <div className="mb-4 flex">
         <input
           type="text"
           value={newRoomName}
           onChange={(e) => setNewRoomName(e.target.value)}
-          placeholder="Tên phòng mới"
+          placeholder="New Room Name"
           className="flex-1 p-2 border border-gray-300 rounded-l"
           onKeyPress={(e) => e.key === 'Enter' && handleCreateRoom()}
         />
@@ -51,7 +51,7 @@ const RoomList = ({ onJoinRoom }) => {
           onClick={handleCreateRoom}
           className="bg-blue-500 text-white px-4 py-2 rounded-r hover:bg-blue-600"
         >
-          Tạo phòng
+          Create Room
         </button>
       </div>
 
@@ -63,7 +63,7 @@ const RoomList = ({ onJoinRoom }) => {
               onClick={() => onJoinRoom(room)}
               className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
             >
-              Tham gia
+              Join
             </button>
           </div>
         ))}

@@ -36,7 +36,7 @@ const MessageList = ({ messages, onDownloadFile }) => {
             ) : message.type === 'file' ? (
               <div className="cursor-pointer" onClick={() => onDownloadFile(message.fileId, message.fileName)}>
                 <div className="font-semibold">📎 {message.fileName}</div>
-                <div className="text-sm underline">Nhấn để tải xuống</div>
+                <div className="text-sm underline">Click to download</div>
               </div>
             ) : message.type === 'system' ? (
               <p className="italic">{message.content}</p>

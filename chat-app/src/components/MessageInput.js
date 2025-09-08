@@ -25,14 +25,14 @@ const MessageInput = ({ onSendMessage, onSendFile }) => {
         type="text"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
-        placeholder="Nhập tin nhắn..."
+        placeholder="Enter message..."
         className="flex-1 p-2 border border-gray-300 rounded-l"
       />
       <button
         type="submit"
         className="bg-blue-500 text-white px-4 py-2 hover:bg-blue-600"
       >
-        Gửi
+        Send
       </button>
       <label className="bg-green-500 text-white px-4 py-2 cursor-pointer hover:bg-green-600 ml-2">
         <input

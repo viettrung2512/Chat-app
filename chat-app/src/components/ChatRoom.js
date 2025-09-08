@@ -83,10 +83,10 @@ const ChatRoom = ({ room, onLeaveRoom }) => {
   };
 
   const handleDownloadFile = (fileId, fileName) => {
-    // Tạo URL để tải file từ server
+    // Create URL to download file from server
     const downloadUrl = `http://localhost:3001/api/files/${fileId}`;
-    
-    // Tạo một thẻ a ẩn để kích hoạt download
+
+    // Create a hidden a tag to trigger download
     const link = document.createElement('a');
     link.href = downloadUrl;
     link.download = fileName;
@@ -105,11 +105,11 @@ const ChatRoom = ({ room, onLeaveRoom }) => {
             onClick={handleLeaveRoom}
             className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
           >
-            ← Trở về
+            ← Back
           </button>
         </div>
         <div className="text-sm text-gray-600">
-          {users.length} người đang online
+          {users.length} people online
         </div>
       </div>
 
@@ -165,7 +165,7 @@ const ChatRoom = ({ room, onLeaveRoom }) => {
               roomId={room.id}
             />
             <div className="mt-4">
-              <h3 className="font-semibold mb-2">Files đã gửi</h3>
+              <h3 className="font-semibold mb-2">Sent Files</h3>
               {messages
                 .filter(m => m.type === 'file')
                 .map((message, index) => (
@@ -175,7 +175,7 @@ const ChatRoom = ({ room, onLeaveRoom }) => {
                       onClick={() => handleDownloadFile(message.fileId, message.fileName)}
                       className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
                     >
-                      Tải xuống
+                      Download
                     </button>
                   </div>
                 ))}

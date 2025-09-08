@@ -39,14 +39,14 @@ const FileTransfer = ({ onSendFile, roomId }) => {
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
     >
-      <p className="text-gray-600 mb-2">Kéo thả file vào đây hoặc</p>
+      <p className="text-gray-600 mb-2">Drag and drop file here or</p>
       <label className="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer hover:bg-blue-600">
         <input
           type="file"
           onChange={handleFileSelect}
           className="hidden"
         />
-        Chọn file
+        Choose File
       </label>
     </div>
   );
