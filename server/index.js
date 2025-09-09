@@ -23,7 +23,7 @@ const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
     origin: process.env.NODE_ENV === 'production' 
-      ? ["https://your-vercel-app.vercel.app", "https://*.vercel.app"] 
+      ? ["https://chat-app-backend-yi62.onrender.com", "https://*.vercel.app"] 
       : "http://localhost:3000",
     methods: ["GET", "POST"],
     credentials: true
