@@ -5,24 +5,28 @@ const cors = require('cors');
 const path = require('path');
 const fs = require('fs');
 
+const PORT = process.env.PORT || 3001;
+
 const app = express();
 app.use(cors());
 app.use(express.json({ limit: '10mb' }));
 
-// Phục vụ static files từ thư mục build của React (cho production)
-app.use(express.static(path.join(__dirname, '../chat-app/build')));
-
 // Tạo thư mục uploads nếu chưa tồn tại
 const uploadsDir = path.join(__dirname, 'uploads');
 if (!fs.existsSync(uploadsDir)) {
-  fs.mkdirSync(uploadsDir);
+  fs.mkdirSync(uploadsDir, { recursive: true });
 }
 
 const server = http.createServer(app);
+
+// Cấu hình CORS cho production và development
 const io = socketIo(server, {
   cors: {
-    origin: "http://localhost:3000", // Địa chỉ React dev server
-    methods: ["GET", "POST"]
+    origin: process.env.NODE_ENV === 'production' 
+      ? ["https://your-vercel-app.vercel.app", "https://*.vercel.app"] 
+      : "http://localhost:3000",
+    methods: ["GET", "POST"],
+    credentials: true
   }
 });
 
@@ -42,6 +46,11 @@ app.get('/api/files/:filename', (req, res) => {
     res.status(404).json({ error: 'File not found' });
   }
 });
+
+// Phục vụ static files từ React build (chỉ trong production)
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../client/build')));
+}
 
 io.on('connection', (socket) => {
   console.log('User connected:', socket.id);
@@ -226,17 +235,15 @@ io.on('connection', (socket) => {
   });
 });
 
-// Xử lý tất cả các route GET không phải API bằng React app (cho production)
+// Xử lý tất cả các route GET không phải API bằng React app (chỉ trong production)
 if (process.env.NODE_ENV === 'production') {
-  // Phục vụ static files từ thư mục build (nếu có)
-  app.use(express.static(path.join(__dirname, '../client/build')));
-  
-  // Xử lý tất cả các route GET không phải API bằng React app
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
   });
 }
 
-server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+// Sửa lỗi biến PORT ở đây
+const port = process.env.PORT || 3001;
+server.listen(port, () => {
+  console.log(`Server running on port ${port}`);
 });
