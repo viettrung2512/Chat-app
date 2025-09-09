@@ -88,7 +88,8 @@ const ChatRoom = ({ room, onLeaveRoom }) => {
   }
 
   const handleDownloadFile = (fileId, fileName) => {
-    const downloadUrl = `http://localhost:3001/api/files/${fileId}`
+    const backendUrl = process.env.REACT_APP_SOCKET_SERVER_URL || 'https://chat-app-backend-yi62.onrender.com';
+  const downloadUrl = `${backendUrl}/api/files/${fileId}`;
     const link = document.createElement("a")
     link.href = downloadUrl
     link.download = fileName

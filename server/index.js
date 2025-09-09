@@ -227,11 +227,16 @@ io.on('connection', (socket) => {
 });
 
 // Xử lý tất cả các route GET không phải API bằng React app (cho production)
-app.get(/^(?!\/api).*/, (req, res) => {
-  res.sendFile(path.join(__dirname, '../chat-app/build', 'index.html'));
-});
+if (process.env.NODE_ENV === 'production') {
+  // Phục vụ static files từ thư mục build (nếu có)
+  app.use(express.static(path.join(__dirname, '../client/build')));
+  
+  // Xử lý tất cả các route GET không phải API bằng React app
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+  });
+}
 
-const PORT = process.env.PORT || 3001;
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
