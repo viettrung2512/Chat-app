@@ -5,8 +5,8 @@ import { useSocket } from './hooks/useSocket';
 
 function App() {
   const [currentRoom, setCurrentRoom] = useState(null);
+  // eslint-disable-next-line no-unused-vars
   const { isConnected } = useSocket();
-
   const handleJoinRoom = (room) => {
     setCurrentRoom(room);
   };
